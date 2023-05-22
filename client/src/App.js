@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import Footer from "./Components/Partials/Footer/Footer";
 import Header from "./Components/Partials/Header/Header";
-import Users from "./Components/Users/Users";
+import Signup from "./Components/SignUp/Signup";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -11,9 +12,9 @@ function App() {
   return (
     <div className="App">
       <Header companyName="e-Shop" isLoggedIn={isLoggedIn} />
-
-      <Users />
-
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
       <Footer />
     </div>
   );
