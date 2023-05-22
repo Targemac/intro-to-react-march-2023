@@ -1,0 +1,29 @@
+.main_navbar {
+  background-color: #6e78ff;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  align-items: center;
+}
+
+.logo_box img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+
+.nav_link_grp ul {
+  display: inline-flex;
+  gap: 2rem;
+}
+
+.nav_link_grp ul li {
+  list-style-type: none;
+}
+
+.nav_link_grp ul li a {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+}

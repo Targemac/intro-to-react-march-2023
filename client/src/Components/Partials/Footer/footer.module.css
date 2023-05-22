@@ -1,0 +1,8 @@
+.footer_wrapper {
+  background-color: #6e78ff;
+  padding: 1rem;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
