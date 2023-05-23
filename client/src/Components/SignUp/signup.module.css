@@ -1,0 +1,30 @@
+.form_container {
+  width: 30%;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  row-gap: 0.5rem;
+}
+
+.form_row {
+  display: grid;
+}
+
+.form_row input {
+  padding: 8px 12px;
+}
+
+.form_container .form_row:nth-child(1) {
+  background-color: #6e78ff;
+  font-size: 2rem;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.form_container .form_row:nth-child(5) input[type="submit"] {
+  background-color: #6e78ff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}

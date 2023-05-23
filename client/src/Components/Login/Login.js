@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import styles from "./signup.module.css";
+import styles from "../SignUp/signup.module.css";
 import { Link } from "react-router-dom";
 
-const Signup = () => {
+const Login = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,21 +37,11 @@ const Signup = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.form_container}>
-        <div className={styles.form_row}>Signup</div>
+        <div className={styles.form_row}>Login</div>
 
         {errorMsg && (
           <div className={styles.error_msg}>All fields are required!</div>
         )}
-
-        <div className={styles.form_row}>
-          <input
-            type="text"
-            placeholder="Full name"
-            value={fullName}
-            name="fullName"
-            onChange={(event) => setFullName(event.target.value)}
-          />
-        </div>
 
         <div className={styles.form_row}>
           <input
@@ -74,12 +64,12 @@ const Signup = () => {
         </div>
 
         <div className={styles.form_row}>
-          <input type="submit" value="Signup" />
+          <input type="submit" value="Login" />
         </div>
 
         <div className={styles.form_row}>
           <span>
-            Already have an account? <Link to="/login">Login</Link>
+            Don't have an account? <Link to="/signup">Signup</Link>
           </span>
         </div>
       </div>
@@ -87,4 +77,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
