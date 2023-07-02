@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import styles from "./signup.module.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState(false);
 
-  const handleSubmit = (event) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Signing up...");
-
-    // validating data
-    if (!fullName || !email || !password) {
-      setErrorMsg(true);
-    } else {
-      setErrorMsg(false);
-    }
+    // console.log("Signing up...");
 
     // creating user object
     let userData = {
@@ -27,11 +24,20 @@ const Signup = () => {
       password: password,
     };
 
-    if (errorMsg === false) {
-      // submit data to back-end
-    }
-
-    console.log(userData);
+    // communication with backend
+    setLoading(true);
+    axios
+      .post("http://localhost:5000/api/users/register", userData)
+      .then((response) => {
+        // console.log(response.data.message);
+        setData(response.data.message);
+        setLoading(false);
+      })
+      .catch((error) => {
+        // console.log(error.response.data.message);
+        setError(error.response.data.message);
+        setLoading(false);
+      });
   };
 
   return (
@@ -39,9 +45,13 @@ const Signup = () => {
       <div className={styles.form_container}>
         <div className={styles.form_row}>Signup</div>
 
-        {errorMsg && (
-          <div className={styles.error_msg}>All fields are required!</div>
+        {loading && !error ? (
+          <div className={styles.form_row}>Loading...</div>
+        ) : (
+          <div className={styles.form_row}>{error}</div>
         )}
+
+        {!error && <div className={styles.form_row}>{data}</div>}
 
         <div className={styles.form_row}>
           <input

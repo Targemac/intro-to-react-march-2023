@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 const connectDB = require("./config/db_connect");
 const userRouter = require("./routes/usersRoutes");
@@ -12,6 +13,7 @@ connectDB();
 const PORT = process.env.PORT || 5000;
 
 // middlewares
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

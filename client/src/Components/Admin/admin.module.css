@@ -1,0 +1,33 @@
+.wrapper {
+  display: grid;
+  row-gap: 1rem;
+}
+
+.head {
+  background: #444;
+  color: white;
+  font-size: 2rem;
+  padding: 1%;
+
+  .firstName {
+  }
+}
+
+.body {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.table_wrapper {
+  width: 100%;
+}
+
+.table_head {
+  background-color: #b8b8b844;
+}
+
+.table_head tr th,
+.table_body tr td {
+  text-align: left;
+  padding: 1%;
+}

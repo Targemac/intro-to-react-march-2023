@@ -1,46 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../SignUp/signup.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
-  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState(null);
 
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Signing up...");
-
-    // validating data
-    if (!fullName || !email || !password) {
-      setErrorMsg(true);
-    } else {
-      setErrorMsg(false);
-    }
+    console.log("Logging in...");
 
     // creating user object
     let userData = {
-      firstName: fullName?.split(" ")[0] ? fullName.split(" ")[0] : "",
-      lastName: fullName?.split(" ")[1] ? fullName.split(" ")[1] : "",
       email: email,
       password: password,
     };
 
-    if (errorMsg === false) {
-      // submit data to back-end
-    }
+    try {
+      setLoading(true);
+      const response = await axios.post(
+        "http://localhost:5000/api/users/login",
+        userData
+      );
 
-    console.log(userData);
+      if (response?.data?.token) {
+        setLoading(false);
+
+        // extract token from response
+        let token = response.data.token;
+
+        // save token to local storage
+        window.localStorage.setItem("LOGIN_TOKEN", token);
+
+        // redirect to user profile page
+        navigate(`/user-profile`);
+      }
+    } catch (error) {
+      setErrorMsg(errorMsg);
+      setLoading(false);
+      console.log(error);
+    }
   };
+  // }, []);
 
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.form_container}>
         <div className={styles.form_row}>Login</div>
 
-        {errorMsg && (
-          <div className={styles.error_msg}>All fields are required!</div>
+        {!errorMsg && loading ? (
+          <div className={styles.error_msg}>Loading...</div>
+        ) : (
+          <div className={styles.error_msg}>{errorMsg}</div>
         )}
 
         <div className={styles.form_row}>
