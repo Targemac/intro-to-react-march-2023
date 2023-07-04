@@ -19,7 +19,14 @@ function App() {
       <div className="App">
         <Header companyName="e-Shop" />
         <Routes>
-          <Route path="/admin" element={<Admin />} />
+          <Route
+            path="/admin"
+            element={
+              <Protected>
+                <Admin />
+              </Protected>
+            }
+          />
 
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

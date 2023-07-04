@@ -256,7 +256,7 @@ const deleteProfile = async (req, res) => {
 
     return res.status(200).json({
       message: "Profile deleted!",
-      data: delete_profile,
+      // data: delete_profile,
     });
   } catch (error) {
     return res.status(500).json({ message: `Internal server error ${error}` });
